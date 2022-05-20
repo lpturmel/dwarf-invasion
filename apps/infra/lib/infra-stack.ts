@@ -35,11 +35,13 @@ export class DwarfInvasionStack extends cdk.Stack {
         const bucket = new s3.Bucket(this, bucketName, {
             bucketName,
             publicReadAccess: true,
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
         const domainNames = [DOMAIN_NAME, `www.${DOMAIN_NAME}`];
         const distribution = new cloudfront.Distribution(this, distName, {
             domainNames,
+            defaultRootObject: "index.html",
             defaultBehavior: {
                 viewerProtocolPolicy:
                     cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
