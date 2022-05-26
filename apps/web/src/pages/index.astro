@@ -1,62 +1,38 @@
 ---
+import { query } from '../api/warcraftlogs/reports';
+import { client } from '../api/warcraftlogs/graphql';
+import { getToken } from '../api/warcraftlogs/auth';
+import Footer from '../components/Footer';
+import Avatar from '../components/Avatar';
+import Reports from '../components/Reports';
+import Externals from '../components/Externals';
 import Layout from '../layouts/Layout.astro';
+
+const token = await getToken();
+
+const api = client(token.access_token);
+
+const data = await api.query<any>(query);
+
 ---
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1 class="font-bold m-auto text-center"><span class="text-gradient mt-2">Dwarf Invasion</span> Guild</h1>
+<Layout title="Dwarf Invasion">
+	<main class="container max-w-2xl m-auto min-h-screen">
+        <div class="flex flex-col gap-2 w-full justify-center items-center">
+            <Avatar style="h-32 w-32" src="/dwarf-icon.webp" />
+            <div class="flex gap-2 justify-center items-center">
+                <img src="/alliance.png" alt="alliance" class="h-10" />
+		        <h1 class="font-bold m-auto text-2xl text text-center">Dwarf Invasion</h1>
+            </div>
+            <p> <span class="text-alliance-base"> Alliance</span>, Zul'Jin, US </p>
+        </div>
+        <Externals />
+
+        <div class="flex w-full items-center mt-10 justify-center text-center">
+            <p> Roster and more to come! </p>
+        </div>
+
+        <Reports reports={data.data.reportData.reports.data}/>
 	</main>
+
+    <Footer />
 </Layout>
-
-<style>
-	:root {
-		--astro-gradient: linear-gradient(0deg,#4F39FA, #DA62C4);
-	}
-
-	h1 {
-		margin: 2rem 0;
-	}
-
-	main {
-		margin: auto;
-    	padding: 1em;
-		max-width: 60ch;
-	}
-
-	.text-gradient {
-		font-weight: 900;
-		background-image: var(--astro-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 100% 200%;
-		background-position-y: 100%;
-		border-radius: 0.4rem;
-		animation: pulse 4s ease-in-out infinite;
-	}
-
-	@keyframes pulse {
-		0%, 100% { background-position-y: 0%; }
-		50% { background-position-y: 80%; }
-	}
-
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		background: #4F39FA;
-		padding: 1.0rem;
-		border-radius: 0.4rem;
-		color: var(--color-bg);
-	}
-
-	.instructions code {
-		font-size: 0.875em;
-		border: 0.1em solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.15em 0.25em;
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
-</style>

@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-text-alliance: #0298e1;
+    }
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    padding-top: 70px;
+    font-family: "Skranji", cursive;
+    color: white;
+}
