@@ -1,7 +1,7 @@
 export const client = (access_token: string) => {
     const BASE_API_URL = "https://www.warcraftlogs.com/api/v2/client";
     return {
-        query: async function <T>(queryValue: string) {
+        query: async function <T>(queryValue: string, variables?: any) {
             const response = await fetch(BASE_API_URL, {
                 method: "POST",
                 headers: {
@@ -10,11 +10,7 @@ export const client = (access_token: string) => {
                 },
                 body: JSON.stringify({
                     query: queryValue,
-                    variables: {
-                        guildName: "Gardiens du Lys",
-                        guildServerSlug: "zuljin",
-                        guildServerRegion: "US",
-                    },
+                    variables,
                 }),
             });
 

@@ -12,7 +12,14 @@ const token = await getToken();
 
 const api = client(token.access_token);
 
-const data = await api.query<any>(query);
+const data = await api.query<any>(query,
+                    {
+                        guildName: "Dwarf Invasion",
+                        guildServerSlug: "zuljin",
+                        guildServerRegion: "US",
+                    }
+);
+
 
 ---
 <Layout title="Dwarf Invasion">
