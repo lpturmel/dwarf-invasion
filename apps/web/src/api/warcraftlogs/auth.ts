@@ -9,6 +9,8 @@ export const getToken = async () => {
     const clientId = import.meta.env.WARCRAFTLOGS_CLIENT_ID;
     const clientSecret = import.meta.env.WARCRAFTLOGS_CLIENT_SECRET;
 
+    console.log("Client id: ", clientId);
+    console.log("Client secret: ", clientSecret);
     const encodedCreds = btoa(clientId + ":" + clientSecret);
     const encodedAuth = `Basic ${encodedCreds}`;
 
@@ -32,7 +34,7 @@ export const getToken = async () => {
         return token;
     } else {
         console.log("Token request response code: ", tokenResponse.status);
-        console.log(tokenResponse.text());
+        console.log(await tokenResponse.text());
     }
     return null;
 };
