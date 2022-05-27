@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
+import netlify from "@astrojs/netlify/edge-functions";
 import tailwind from "@astrojs/tailwind";
-import netlify from "@astrojs/netlify/functions";
 import solid from "@astrojs/solid-js";
 
 // https://astro.build/config
