@@ -30,6 +30,9 @@ export const getToken = async () => {
         const token = (await tokenResponse.json()) as TokenResponse;
 
         return token;
+    } else {
+        console.log("Token request response code: ", tokenResponse.status);
+        console.log(tokenResponse.text());
     }
     return null;
 };
