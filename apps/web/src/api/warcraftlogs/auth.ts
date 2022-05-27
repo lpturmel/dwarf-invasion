@@ -5,9 +5,15 @@ interface TokenResponse {
     expires_in: number;
     access_token: string;
 }
+
+const getEnv = (variableName: string) => {
+    return process.env.NODE_ENV === "development"
+        ? import.meta.env[variableName]
+        : Deno.env.get(variableName);
+};
 export const getToken = async () => {
-    const clientId = import.meta.env.WARCRAFTLOGS_CLIENT_ID;
-    const clientSecret = import.meta.env.WARCRAFTLOGS_CLIENT_SECRET;
+    const clientId = getEnv("WARCRAFTLOGS_CLIENT_ID");
+    const clientSecret = getEnv("WARCRAFTLOGS_CLIENT_SECRET");
 
     console.log("Client id: ", clientId);
     console.log("Client secret: ", clientSecret);
@@ -36,5 +42,6 @@ export const getToken = async () => {
         console.log("Token request response code: ", tokenResponse.status);
         console.log(await tokenResponse.text());
     }
+    console.log(process.env.NODE_ENV);
     return null;
 };
