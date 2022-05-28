@@ -1,4 +1,4 @@
-export const query = `
+export const warcraftLogsReportsQuery = `
 query ReportData($guildName: String!, $guildServerSlug: String!, $guildServerRegion: String!){
     reportData {
         reports(guildName: $guildName, guildServerSlug: $guildServerSlug, guildServerRegion: $guildServerRegion, limit: 5) {

@@ -1,22 +1,18 @@
 import { getEnv } from "../../utils/env";
 
-const TOKEN_URL = "https://www.warcraftlogs.com/oauth/token";
-
 interface TokenResponse {
+    access_token: string;
     token_type: string;
     expires_in: number;
-    access_token: string;
+    scope: string;
 }
+export const getBnetToken = async () => {
+    const TOKEN_URL = "https://us.battle.net/oauth/token";
+    const clientId = getEnv("BNET_CLIENT_ID");
+    const clientSecret = getEnv("BNET_CLIENT_SECRET");
 
-export const getWlToken = async () => {
-    // const clientId = getEnv("WARCRAFTLOGS_CLIENT_ID");
-    // const clientSecret = getEnv("WARCRAFTLOGS_CLIENT_SECRET");
-    const clientId = import.meta.env.WARCRAFTLOGS_CLIENT_ID;
-    const clientSecret = import.meta.env.WARCRAFTLOGS_CLIENT_SECRET;
-
-    console.log("Client id: ", clientId);
-    console.log("Client secret: ", clientSecret);
-    console.log(import.meta.env.DEV);
+    console.log("Bnet client id: ", clientId);
+    console.log("Bnet client secret: ", clientSecret);
     const encodedCreds = btoa(clientId + ":" + clientSecret);
     const encodedAuth = `Basic ${encodedCreds}`;
 

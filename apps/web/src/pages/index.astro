@@ -1,29 +1,37 @@
 ---
-import { query } from '../api/warcraftlogs/reports';
+import { getRosterData } from '../api/battlenet/rest';
+import RosterHero from '../components/RosterHero';
+import { warcraftLogsReportsQuery } from "../api/warcraftlogs/reports";
 import { client } from '../api/warcraftlogs/graphql';
-import { getToken } from '../api/warcraftlogs/auth';
+import { getWlToken } from '../api/warcraftlogs/auth';
+import { getBnetToken } from "../api/battlenet/auth";
 import Footer from '../components/Footer';
+import Roster from '../components/Roster';
 import Avatar from '../components/Avatar';
 import Reports from '../components/Reports';
 import Externals from '../components/Externals';
 import Layout from '../layouts/Layout.astro';
 
-const token = await getToken();
 
-const api = client(token.access_token);
 
-const data = await api.query<any>(query,
+const [wlAuth, bnetAuth] = await Promise.all([getWlToken(), getBnetToken()]);
+
+const wl = client(wlAuth.access_token);
+
+const [rosterData, reportData] = await Promise.all([getRosterData(bnetAuth.access_token),wl.query<any>(warcraftLogsReportsQuery,
                     {
                         guildName: "Dwarf Invasion",
                         guildServerSlug: "zuljin",
                         guildServerRegion: "US",
                     }
-);
+)]);
+console.log(rosterData)
 
 
 ---
 <Layout title="Dwarf Invasion">
 	<main class="container max-w-2xl m-auto min-h-screen">
+    <div class="min-h-[70vh]">
         <div class="flex flex-col gap-2 w-full justify-center items-center">
             <Avatar style="h-32 w-32" src="/dwarf-icon.webp" />
             <div class="flex gap-2 justify-center items-center">
@@ -31,14 +39,14 @@ const data = await api.query<any>(query,
 		        <h1 class="font-bold m-auto text-2xl text text-center">Dwarf Invasion</h1>
             </div>
             <p> <span class="text-alliance-base"> Alliance</span>, Zul'Jin, US </p>
+            <p> Monday/Wednesday 7:30 - 10:30pm EST </p>
         </div>
         <Externals />
-
-        <div class="flex w-full items-center mt-10 justify-center text-center">
-            <p> Roster and more to come! </p>
         </div>
 
-        <Reports reports={data.data.reportData.reports.data}/>
+        <Roster characters={rosterData}/>
+
+        <Reports reports={reportData?.data?.reportData?.reports?.data}/>
 	</main>
 
     <Footer />
