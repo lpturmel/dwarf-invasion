@@ -25,7 +25,7 @@ const ReportItem: Component<ReportItemProps> = (props) => {
             class="flex justify-between rounded-md bg-gray-700 p-2"
         >
             <div class="flex flex-col gap-1">
-                <p class="text-sm text-gray-400"> {props.owner.name} </p>
+                <p class="text-sm text-gray-300"> {props.owner.name} </p>
                 <p> {title} </p>
             </div>
             <p class="text-sm">{new Date(props.endTime).toDateString()}</p>

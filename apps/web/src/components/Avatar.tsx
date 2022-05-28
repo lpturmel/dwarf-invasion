@@ -10,6 +10,7 @@ const Avatar: Component<AvatarProps> = (props) => {
             <img
                 src={props.src}
                 class="block h-full w-full rounded-full object-cover"
+                alt="avatar"
             />
         </div>
     );
