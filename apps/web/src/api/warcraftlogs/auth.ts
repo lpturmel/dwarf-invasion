@@ -9,14 +9,11 @@ interface TokenResponse {
 }
 
 export const getWlToken = async () => {
-    // const clientId = getEnv("WARCRAFTLOGS_CLIENT_ID");
-    // const clientSecret = getEnv("WARCRAFTLOGS_CLIENT_SECRET");
-    const clientId = import.meta.env.WARCRAFTLOGS_CLIENT_ID;
-    const clientSecret = import.meta.env.WARCRAFTLOGS_CLIENT_SECRET;
+    const clientId = getEnv("WARCRAFTLOGS_CLIENT_ID");
+    const clientSecret = getEnv("WARCRAFTLOGS_CLIENT_SECRET");
 
     console.log("Client id: ", clientId);
     console.log("Client secret: ", clientSecret);
-    console.log(import.meta.env.DEV);
     const encodedCreds = btoa(clientId + ":" + clientSecret);
     const encodedAuth = `Basic ${encodedCreds}`;
 
