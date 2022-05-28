@@ -140,4 +140,13 @@ export const roster: Character[] = [
         thumbnail:
             "https://render-us.worldofwarcraft.com/character/zuljin/100/246903908-avatar.jpg?alt=wow/static/images/2d/avatar/29-0.jpg",
     },
+    {
+        name: "Dwarferino",
+        realm: "zuljin",
+        region: "us",
+        class: "warrior",
+        role: "dps",
+        thumbnail:
+            "https://render-us.worldofwarcraft.com/character/zuljin/100/246903908-avatar.jpg?alt=wow/static/images/2d/avatar/29-0.jpg",
+    },
 ];
