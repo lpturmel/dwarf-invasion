@@ -77,15 +77,15 @@ export const wowClassMap = {
     },
 };
 export const roster: Character[] = [
-    {
-        name: "Caresseur",
-        realm: "zuljin",
-        region: "us",
-        class: "paladin",
-        role: "tank",
-        thumbnail:
-            "https://render-us.worldofwarcraft.com/character/zuljin/250/242088698-avatar.jpg?alt=wow/static/images/2d/avatar/31-0.jpg",
-    },
+    // {
+    //     name: "Caresseur",
+    //     realm: "zuljin",
+    //     region: "us",
+    //     class: "paladin",
+    //     role: "tank",
+    //     thumbnail:
+    //         "https://render-us.worldofwarcraft.com/character/zuljin/250/242088698-avatar.jpg?alt=wow/static/images/2d/avatar/31-0.jpg",
+    // },
     {
         name: "Rothunda",
         realm: "zuljin",
